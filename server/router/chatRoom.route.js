@@ -1,4 +1,5 @@
 const ChatRoomModel = require("../models/ChatRoom.model");
+const NotificationModel = require("../models/Notification.model");
 const socket = require("../utils/serverSocket");
 const router = require("express").Router();
 
@@ -35,6 +36,16 @@ router.put("/:crId", async (req, res) => {
 		},
 		{ new: true }
 	);
+
+	// add notification to database
+	const newNotification = new NotificationModel({ msg, forUsers: [] });
+	const savedNotification = await newNotification.save();
+
+	// emit new message
+	socket.emit("new-msg");
+
+	// emit notification
+	socket.emit("push-noti");
 
 	return res.json({ success: true, data: updatedChatRoom });
 });

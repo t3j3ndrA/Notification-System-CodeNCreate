@@ -43,16 +43,20 @@ app.use("/api/room", ChatRoomRoute);
 io.on("connection", (socket) => {
 	console.log(`⚡: ${socket.id} user just connected!`);
 
-	socket.on("join-id", (userId) => {
-		// on connection create a room with the name of user id
-		console.log("user joined : ", userId, " Room");
-		socket.join(userId);
-	});
+	// on connection join all the connected users to my-room for notifications
+	socket.join("my-room");
 
 	socket.on("push-noti", (notification) => {
-		const rooms = notification.forUsers.map((user) => user._id);
-		console.log("Sending notifications to : ", rooms);
-		socket.to(rooms).emit("new-noti", notification);
+		// const rooms = notification.forUsers.map((user) => user._id);
+		// console.log("Sending notifications to : ", rooms);
+		// socket.to(rooms).emit("new-noti", notification);
+		console.log("socke.on(push-noti)");
+		socket.to("my-room").emit("new-noti", notification);
+	});
+
+	socket.on("new-msg", () => {
+		console.log("socke.on(new-msg)");
+		socket.to("my-room").emit("new-msg", "Fetch messages");
 	});
 
 	socket.on("disconnect", () => {
