@@ -48,10 +48,12 @@ router.get("/of/:userId", async (req, res) => {
 
 	if (!userId) return res.json({ success: false, msg: "No userId provided" });
 
-	const notifications = await NotificationModel.find(
+	let notifications = await NotificationModel.find(
 		{ "forUsers._id": userId },
 		{ _id: 1, msg: 1, "forUsers.$": 1 }
 	);
+
+	notifications.reverse();
 
 	return res.json({ success: true, data: notifications });
 });
