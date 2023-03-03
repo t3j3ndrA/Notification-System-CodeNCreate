@@ -14,6 +14,7 @@ const httpServer = createServer(app);
 const NotificationRoute = require("./router/notification.route");
 const UserRoute = require("./router/user.route");
 const AuthRoute = require("./router/auth.route");
+const ChatRoomRoute = require("./router/chatRoom.route");
 
 const io = new Server(httpServer, {
 	cors: { origin: "*" },
@@ -36,6 +37,7 @@ app.get("/api", (req, res) => {
 app.use("/api/noti", NotificationRoute);
 app.use("/api/user", UserRoute);
 app.use("/api/auth", AuthRoute);
+app.use("/api/room", ChatRoomRoute);
 
 // socket
 io.on("connection", (socket) => {
