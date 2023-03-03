@@ -12,6 +12,7 @@ const httpServer = createServer(app);
 // routes
 
 const NotificationRoute = require("./router/notification.route");
+const UserRoute = require("./router/user.route");
 
 const io = new Server(httpServer, {
 	cors: { origin: "*" },
@@ -32,6 +33,7 @@ app.get("/api", (req, res) => {
 // middlewares
 
 app.use("/api/noti", NotificationRoute);
+app.use("/api/user", UserRoute);
 
 // socket
 io.on("connection", (socket) => {

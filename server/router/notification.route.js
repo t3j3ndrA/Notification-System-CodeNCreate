@@ -1,7 +1,9 @@
 const NotificationModel = require("../models/Notification.model");
-const { io } = require("socket.io-client");
+// const { io } = require("socket.io-client");
 
-const socket = io("http://localhost:5000");
+// const socket = io("http://localhost:5000");
+
+const socket = require("../utils/serverSocket");
 
 const router = require("express").Router();
 
