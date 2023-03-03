@@ -28,7 +28,7 @@ function App() {
                         </>
                     }>
                     <Route path='/' element={<Home/>}/>
-                    <Route path='/chat' element={<ChattingPage/>}/>
+                    <Route path='/messages' element={<ChattingPage/>}/>
                     <Route path='/notifications' element={<Notifications/>}/>
                </Route>
                <Route path='/login' element={<Login/>}/>
