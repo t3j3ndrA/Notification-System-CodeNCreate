@@ -16,11 +16,12 @@ function App() {
   return (
     <>
         <>
+        <div className='bg-white dark:bg-slate-800'>
             <Router>
                 <Routes>
                     <Route element={
                         <>
-                            <div className='flex w-3/4 mx-auto'>
+                            <div className='flex'>
                             <SideNavbar/>
                             <Outlet/>
                             </div>
@@ -33,6 +34,7 @@ function App() {
                <Route path='/login' element={<Login/>}/>
                 </Routes>
             </Router>
+            </div>
         </>
     </>
   );

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { FiSend } from "react-icons/fi";
 
 import { io } from "socket.io-client";
 const socket = io("http://localhost:5000");
@@ -113,17 +114,17 @@ const ChattingPage = () => {
 				<form onSubmit={handleSubmit} className="flex">
 					<input
 						type="text"
-						className="flex-1 border-gray-300 border-2 rounded-full py-2 px-3 mr-2 focus:outline-none"
+						className="flex-1 border-gray-300 border-2 rounded-lg py-2 px-3 mr-2 focus:outline-none"
 						placeholder="Type a message..."
 						value={newMessage}
 						onChange={handleChange}
 					/>
 					<button
-						className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg"
+						className="bg-blue-500 text-2xl hover:scale-105 cursor-pointer text-white font-bold py-2 px-4 rounded-lg"
 						type="submit"
 						disabled={!newMessage}
 					>
-						Send
+                        <FiSend className="" />		
 					</button>
 				</form>
 			</footer>
