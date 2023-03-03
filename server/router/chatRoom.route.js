@@ -1,5 +1,6 @@
 const ChatRoomModel = require("../models/ChatRoom.model");
 const NotificationModel = require("../models/Notification.model");
+const UserModel = require("../models/User.model");
 const socket = require("../utils/serverSocket");
 const router = require("express").Router();
 
@@ -26,19 +27,25 @@ router.get("/:crId", async (req, res) => {
 // Add message
 router.put("/:crId", async (req, res) => {
 	const { crId } = req.params;
-	const { sender, msg } = req.body;
+	const { sender, msg, username } = req.body;
 	const updatedChatRoom = await ChatRoomModel.findOneAndUpdate(
 		{ _id: crId },
 		{
 			$push: {
-				messages: { sender, msg },
+				messages: { sender, msg, username },
 			},
 		},
 		{ new: true }
 	);
 
+	const users = await UserModel.find({ _id: { $ne: sender } }, { _id: 1 });
+	console.log("rem users >> ", users);
 	// add notification to database
-	const newNotification = new NotificationModel({ msg, forUsers: [] });
+	const notificationMsg = `${username} has sent ${msg} to ${updatedChatRoom?.name}`;
+	const newNotification = new NotificationModel({
+		msg: notificationMsg,
+		forUsers: users,
+	});
 	const savedNotification = await newNotification.save();
 
 	// emit new message

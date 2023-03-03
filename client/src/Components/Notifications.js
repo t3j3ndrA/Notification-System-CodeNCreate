@@ -60,7 +60,11 @@ const Notifications = () => {
 					{notifications?.map(({ msg, forUsers }, idx) => {
 						return (
 							<>
-								<NotificationCard msg={msg} read={forUsers[0].read} />
+								<NotificationCard
+									msg={msg}
+									read={forUsers[0].read}
+									createdAt={forUsers[0]?.createdAt}
+								/>
 							</>
 						);
 					})}
@@ -70,13 +74,18 @@ const Notifications = () => {
 	);
 };
 
-const NotificationCard = ({ msg, read }) => {
+const NotificationCard = ({ msg, read, createdAt }) => {
+	const dt = new Date(createdAt);
+
 	return (
 		<>
 			<div className="border-b flex space-x-4  p-2">
 				<img src="../images/avatar.jpg" className="w-12 h-12 rounded-full " />
 				<div>
-					<h4 className="font-medium">{read ? "read" : "unread"}</h4>
+					{/* <h4 className="font-medium">{read ? "read" : "unread"}</h4> */}
+					<p className="text-gray-600 text-sm">
+						{dt ? `${dt.getHours()}:${dt.getMinutes()}` : ""}
+					</p>
 					<h4>{msg}</h4>
 				</div>
 			</div>
