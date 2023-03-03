@@ -1,10 +1,13 @@
 const Notifications = () => {
     return(
         <>
-            <div className="p-4 w-full h-screen">
+            <div className="w-full h-screen overflow-hidden p-4 bg-gray-50 dark:bg-slate-700">
+            <div className="p-4 flex justify-between items-center shadow-md bg-white dark:bg-black rounded-lg h-20">
                 <h1 className="text-2xl font-medium">Notifications</h1>
-                <div className="h-1 mt-2 mb-4 rounded-full bg-black"></div>
-                <div className="flex flex-col space-y-2 overflow-y-scroll h-[89vh]">
+                <button className="font-medium text-blue-300 hover:text-blue-400 hover:scale-105">Mark all as read</button>
+            </div>
+                {/* <div className="h-1 mt-2 mb-4 rounded-full bg-black"></div> */}
+                <div className="flex flex-col overflow-y-scroll h-[78.5vh] mt-2 rounded-2xl">
                 {
                     
                     [...Array(12)].map((val,idx)=> {
@@ -24,7 +27,7 @@ const Notifications = () => {
 const NotificationCard = () => {
     return(
         <>
-            <div className="border flex space-x-4 rounded-xl p-2">
+            <div className="border-y flex space-x-4 p-2 bg-white">
                 <img src="../images/avatar.jpg" className="w-12 h-12 rounded-full "/>
                 <div>
                     <h4 className="font-medium">Ronak Shah</h4>
