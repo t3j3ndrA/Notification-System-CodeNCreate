@@ -55,6 +55,13 @@ const ChattingPage = () => {
 		});
 
 		socket.on("new-noti", (notification) => {});
+
+		return () => {
+			socket.off("connect");
+			socket.off("disconnect");
+			socket.off("new-noti");
+			socket.off("new-msg");
+		};
 	}, []);
 
 	const [newMessage, setNewMessage] = useState("");
