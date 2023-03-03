@@ -9,6 +9,7 @@ import SideNavbar from './Components/Navbar';
 import Home from './Components/Home';
 import Login from './Components/Login';
 import ChattingPage from './Components/Chat';
+import Notifications from './Components/Notifications';
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
                 <Routes>
                     <Route element={
                         <>
-                            <div className='flex'>
+                            <div className='flex w-3/4 mx-auto'>
                             <SideNavbar/>
                             <Outlet/>
                             </div>
@@ -27,6 +28,7 @@ function App() {
                     }>
                     <Route path='/' element={<Home/>}/>
                     <Route path='/chat' element={<ChattingPage/>}/>
+                    <Route path='/notifications' element={<Notifications/>}/>
                </Route>
                <Route path='/login' element={<Login/>}/>
                 </Routes>

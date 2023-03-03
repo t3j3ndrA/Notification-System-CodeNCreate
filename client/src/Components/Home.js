@@ -31,7 +31,9 @@ const Home = () => {
 	}, []);
 	return (
 		<>
-			<h1>Home page {isConnected}</h1>
+        <div className="w-full">
+			<h1 className="">Home page {isConnected}</h1>
+        </div>
 		</>
 	);
 };

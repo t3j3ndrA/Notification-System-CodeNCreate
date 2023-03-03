@@ -47,7 +47,7 @@ const ChattingPage = () => {
 	console.log("chatRoomState", chatRoom);
 
 	return (
-		<div className="flex flex-col h-screen">
+		<div className="flex flex-col h-screen w-full">
 			<header className="bg-pink-500 text-white flex items-center justify-between px-4 py-3">
 				<div className="flex items-center">
 					<img
