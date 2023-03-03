@@ -1,31 +1,60 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
+import { io } from "socket.io-client";
+const socket = io("http://localhost:5000");
+
 const ChattingPage = () => {
 	const userId = localStorage.getItem("_id");
+	const username = localStorage.getItem("username");
+
 	const [chatRoom, setChatRoom] = useState({});
-	useEffect(() => {
+	const [isConnected, setIsConnected] = useState(socket.connected);
+	const [key, setKey] = useState(Math.random());
+
+	const fetchChatRoom = async () => {
 		axios
 			.get(`http://localhost:5000/api/room/6401fb9bfc859f42a023419c`)
 			.then(({ data }) => {
 				setChatRoom(data.data);
-				// console.log("chatRooms", data.data);
+				setKey(Math.random());
 			})
 			.catch((err) => console.log(err));
-	}, []);
+	};
 
-	const [messages, setMessages] = useState([
-		{
-			username: "Alice",
-			message: "Hi there!",
-			time: "12:00 PM",
-		},
-		{
-			username: "Bob",
-			message: "Hey!",
-			time: "12:01 PM",
-		},
-	]);
+	const sendMessage = async () => {
+		axios
+			.put(`http://localhost:5000/api/room/6401fb9bfc859f42a023419c`, {
+				username,
+				sender: userId,
+				msg: newMessage,
+			})
+			.then(({ data }) => {
+				setChatRoom(data.data);
+				setKey(Math.random());
+				setNewMessage("");
+			})
+			.catch((err) => console.log(err));
+	};
+
+	useEffect(() => {
+		fetchChatRoom();
+
+		socket.on("connect", () => {
+			console.log("connected");
+			setIsConnected(true);
+		});
+
+		socket.on("disconnect", () => {
+			setIsConnected(false);
+		});
+
+		socket.on("new-msg", () => {
+			fetchChatRoom();
+		});
+
+		socket.on("new-noti", (notification) => {});
+	}, []);
 
 	const [newMessage, setNewMessage] = useState("");
 
@@ -35,16 +64,8 @@ const ChattingPage = () => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		const newMsg = {
-			username: "Alice",
-			message: newMessage,
-			time: new Date().toLocaleTimeString(),
-		};
-		setMessages([...messages, newMsg]);
-		setNewMessage("");
+		sendMessage();
 	};
-
-	console.log("chatRoomState", chatRoom);
 
 	return (
 		<div className="flex flex-col h-screen">
@@ -58,19 +79,28 @@ const ChattingPage = () => {
 					<h1 className="font-bold text-xl">{chatRoom?.name}</h1>
 				</div>
 			</header>
-			<main className="flex-1 p-4 overflow-y-scroll">
-				{chatRoom?.messages?.map(({ sender, msg }, index) => (
-					<div
-						key={index}
-						className={`${sender == userId ? "text-right" : "text-left"} mb-4`}
-					>
-						<p className="font-medium mb-1">{sender}</p>
-						<p className="bg-purple-200 rounded-lg py-2 px-3 inline-block">
-							{msg}
-						</p>
-						<p className="text-gray-600 text-sm">{}</p>
-					</div>
-				))}
+			<main className="flex-1 p-4 overflow-y-scroll" key={key}>
+				{chatRoom?.messages?.map(
+					({ username, sender, msg, createdAt }, index) => {
+						const dt = new Date(createdAt);
+						return (
+							<div
+								key={index}
+								className={`${
+									sender == userId ? "text-right" : "text-left"
+								} mb-4`}
+							>
+								<p className="font-medium mb-1">{username}</p>
+								<p className="bg-purple-200 rounded-lg py-2 px-3 inline-block">
+									{msg}
+								</p>
+								<p className="text-gray-600 text-sm">
+									{dt.getHours() + ":" + dt.getMinutes()}
+								</p>
+							</div>
+						);
+					}
+				)}
 			</main>
 			<footer className="bg-white px-4 py-3">
 				<form onSubmit={handleSubmit} className="flex">
