@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { AiFillFacebook } from "react-icons/ai";
 import { BsMicrosoft } from "react-icons/bs";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
+import { ThemeContext } from "../ThemeContext";
+
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -26,6 +28,7 @@ const Login = () => {
 			navigate("/chat");
 		}
 	};
+	const { theme, setTheme } = React.useContext(ThemeContext);
 
 	return (
 		<>
@@ -35,11 +38,13 @@ const Login = () => {
 					style={{ backgroundSize: "cover", backgroundPosition: "center" }}
 				>
 					{/* <img src="../images/login.png" className="absolute -left-1 top-4" /> */}
-					<img src="../images/screenshot4.png" className="z-50" />
+					<img src="../images/login-pic.png" className="z-50 h-[80vh]" />
 				</div>
 				<div className="flex flex-col space-y-4">
-					<div className="sm:border flex flex-col items-center border-gray-300 shadow-sm shadow-gray-300 rounded-xl">
-						<img src="../images/insta.png" className="w-64 my-8" />
+					<div className="sm:border flex flex-col items-center border-gray-300 shadow-sm shadow-gray-300">
+						{/* <img src="../images/insta.png" className="w-64 my-8" /> */}
+						{theme === 'light' ? <img src="../images/insta.png" className="w-64 my-8" /> :
+							<img src="../images/insta-dark.png" className="w-56 my-8" />}
 						<div className="sm:w-[90%] p-6 rounded-lg">
 							<form onSubmit={handleSubmit}>
 								<div className="mb-2">
@@ -70,7 +75,7 @@ const Login = () => {
 								</button>
 							</form>
 							<div className="my-6 relative">
-								<h6 className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 text-gray-500 text-sm font-medium bg-white z-50 w-12 text-center">
+								<h6 className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 text-gray-500 text-sm font-medium bg-white z-50 w-12 text-center dark:bg-black dark:text-white">
 									OR
 								</h6>
 								<div className="h-px -z-50 bg-gray-500"></div>
@@ -79,7 +84,7 @@ const Login = () => {
 								{/* <span className="bg-white"><AiFillFacebook /></span>
 								<h6 className="bg-[#4267B2] text-white py-2">Log in with Facebook</h6> */}
 								<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded flex items-center">
-									<AiFillFacebook  className="mr-2 text-3xl"/>
+									<AiFillFacebook className="mr-2 text-3xl" />
 									<span className="ml-2">Login with Facebook</span>
 								</button>
 
@@ -87,7 +92,7 @@ const Login = () => {
 							<h6 className="text-center text-xs my-4 text-indigo-700 cursor-pointer">Forgot password?</h6>
 						</div>
 					</div>
-					<div className="sm:border p-6 rounded-xl border-gray-300">
+					<div className="sm:border sm:p-6 p-5 border-gray-300">
 						<h1 className="text-center">
 							<span className="dark:text-white">Don't have an account?{" "}</span>
 							<span className="text-indigo-700 cursor-pointer">Sign up</span>
@@ -138,7 +143,7 @@ const Footer = () => {
 				<h1>Contact Uploading & Non-Users</h1>
 				<h1>Meta Verified</h1>
 			</div>
-			<div className="flex space-x-4 text-xs text-gray-600 sm:w-3/5 justify-center mx-auto mt-4 mb-8">
+			<div className="flex space-x-4 text-xs text-gray-600 sm:w-3/5 justify-center mx-auto mt-4 pb-8">
 				<h4>English</h4>
 				<div>
 					<h4>&#169; 2023 Instagram from Meta</h4>
