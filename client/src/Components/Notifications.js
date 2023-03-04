@@ -70,7 +70,7 @@ const Notifications = () => {
 			<div className="p-4 w-full h-screen">
 				<h1 className="text-2xl font-medium dark:text-white">Notifications</h1>
 				<div className="h-1 mt-2 mb-4 rounded-full bg-black dark:bg-[#262626]"></div>
-				<div className="flex flex-col  overflow-y-scroll h-[89vh]" key={key}>
+				<div className="flex flex-col  overflow-y-auto h-[89vh]" key={key}>
 					<div className="flex flex-row gap-2 justify-start items-center mb-4 dark:text-[#fafafa]">
 						<div>
 							<input

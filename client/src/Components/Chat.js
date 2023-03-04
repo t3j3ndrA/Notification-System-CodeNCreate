@@ -87,7 +87,7 @@ const ChattingPage = () => {
 					<h1 className="font-bold text-xl">{chatRoom?.name}</h1>
 				</div>
 			</header>
-			<main className="flex-1 p-4 overflow-y-scroll" key={key}>
+			<main className="flex-1 p-4 overflow-y-auto" key={key}>
 				{chatRoom?.messages?.map(
 					({ username, sender, msg, createdAt }, index) => {
 						const dt = new Date(createdAt);
