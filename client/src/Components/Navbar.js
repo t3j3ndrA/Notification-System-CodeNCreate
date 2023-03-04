@@ -15,13 +15,13 @@ const SideNavbar = () => {
   return (
     <div className="flex order-last md:order-first md:static">
       <div
-        className={`md:w-64 md:h-screen md:border-r border-t bg-white text-black dark:bg-[#000] dark:text-[#fff] flex flex-row md:flex-col items-center justify-between transition-transform duration-300 ease-in-out`}
+        className={`md:w-64 md:h-screen md:border-r dark:border-[#262626] dark:border-r-2 bg-white text-black dark:bg-[#000] dark:text-[#fff] flex flex-row md:flex-col items-center justify-between transition-transform duration-300 ease-in-out`}
       >
         <div className="md:p-4 py-2 flex flex-row md:flex-col ">
           <img src="../images/insta.png" className="md:w-full hidden md:block"/>
           <nav className="md:mt-6"> 
             <ul className="flex flex-row md:flex-col md:w-full w-screen pr-0 sm:px-6 md:pr-0 justify-between">
-              <Link to={"/"} className={`flex space-x-2 items-center md:mb-4 rounded-lg py-2 px-2 sm:px-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#121212] dark:hover:text-white ${loc.pathname === "/" ? "bg-gray-200 font-medium dark:bg-[#fff] dark:text-black" : ""}`}>
+              <Link to={"/"} className={`flex space-x-2 items-center md:mb-4 rounded-lg py-2 px-2 sm:px-4 cursor-pointer hover:text-[#2d3436] dark:hover:bg-[#121212] dark:hover:text-white ${loc.pathname === "/" ? "bg-gray-100 font-medium dark:bg-[#fff] dark:text-black" : ""}`}>
                 <FiHome className="text-base sm:text-2xl md:text-base"/>
                 <h6 className="hidden md:block">Home</h6>
               </Link>
