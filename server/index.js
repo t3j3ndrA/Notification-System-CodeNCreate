@@ -15,6 +15,7 @@ const NotificationRoute = require("./router/notification.route");
 const UserRoute = require("./router/user.route");
 const AuthRoute = require("./router/auth.route");
 const ChatRoomRoute = require("./router/chatRoom.route");
+const path = require("path");
 
 const io = new Server(httpServer, {
 	cors: { origin: "*" },
@@ -25,7 +26,7 @@ env.config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cors({ origin: "*", credentials: true }));
 
 // health check API
 app.get("/api", (req, res) => {
@@ -38,6 +39,15 @@ app.use("/api/noti", NotificationRoute);
 app.use("/api/user", UserRoute);
 app.use("/api/auth", AuthRoute);
 app.use("/api/room", ChatRoomRoute);
+
+// react build provider
+// const __dirname = dirname(fileURLToPath(import.meta.url));
+console.log("__dirname = ", __dirname);
+
+app.use(express.static(path.join(__dirname, "..", "client", "build")));
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
+});
 
 // socket
 io.on("connection", (socket) => {
@@ -69,7 +79,8 @@ io.on("connection", (socket) => {
 connectDB();
 
 // starting server
-const port = process.env.PORT || 5000;
+// process.env.PORT is set in deployment by hosting site
+const port = process.env.PORT | 5000;
 
 httpServer.listen(port, () => {
 	console.log("listening on port  : " + port);

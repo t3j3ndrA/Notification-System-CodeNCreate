@@ -1,4 +1,7 @@
 const { io } = require("socket.io-client");
-const socket = io("http://localhost:5000");
+const env = require("dotenv");
+env.config();
+
+const socket = io();
 
 module.exports = socket;

@@ -15,7 +15,7 @@ const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		// Logic for handling login form submission
-		const { data } = await axios.post("http://localhost:5000/api/auth/login", {
+		const { data } = await axios.post("/api/auth/login", {
 			username: email,
 			password,
 		});

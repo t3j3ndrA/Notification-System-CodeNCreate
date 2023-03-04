@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { io } from "socket.io-client";
-const socket = io("http://localhost:5000");
+const socket = io();
 
 const Notifications = () => {
 	const userId = localStorage.getItem("_id");
@@ -20,7 +20,7 @@ const Notifications = () => {
 
 	const fetchUsersNotifications = async () => {
 		axios
-			.get(`http://localhost:5000/api/noti/of/${userId}`)
+			.get(`/api/noti/of/${userId}`)
 			.then(({ data }) => {
 				setNotifications(data.data);
 				setKey(Math.random());
@@ -33,7 +33,7 @@ const Notifications = () => {
 
 		const data = { notifications: Array.from(selectedNotifications) };
 		axios
-			.put(`http://localhost:5000/api/noti/mark-read/${userId}`, data)
+			.put(`/api/noti/mark-read/${userId}`, data)
 			.then(({ data }) => {
 				setSelectedNotifications(new Set());
 				fetchUsersNotifications();

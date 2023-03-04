@@ -9,7 +9,7 @@ import image2 from "../images/light-bg.jpg";
 
 import { io } from "socket.io-client";
 import { ThemeContext } from "../ThemeContext";
-const socket = io("http://localhost:5000");
+const socket = io();
 
 const ChattingPage = () => {
 	const userId = localStorage.getItem("_id");
@@ -23,7 +23,7 @@ const ChattingPage = () => {
 
 	const fetchChatRoom = async () => {
 		axios
-			.get(`http://localhost:5000/api/room/6401fb9bfc859f42a023419c`)
+			.get(`/api/room/6401fb9bfc859f42a023419c`)
 			.then(({ data }) => {
 				setChatRoom(data.data);
 				setKey(Math.random());
@@ -33,7 +33,7 @@ const ChattingPage = () => {
 
 	const sendMessage = async () => {
 		axios
-			.put(`http://localhost:5000/api/room/6401fb9bfc859f42a023419c`, {
+			.put(`/api/room/6401fb9bfc859f42a023419c`, {
 				username,
 				sender: userId,
 				msg: newMessage,

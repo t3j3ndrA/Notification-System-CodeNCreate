@@ -1,7 +1,7 @@
 const NotificationModel = require("../models/Notification.model");
 // const { io } = require("socket.io-client");
 
-// const socket = io("http://localhost:5000");
+// const socket = io();
 
 const socket = require("../utils/serverSocket");
 
