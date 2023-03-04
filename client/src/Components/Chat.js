@@ -77,7 +77,7 @@ const ChattingPage = () => {
 
 	return (
 		<div className="flex flex-col md:h-screen h-[92vh] w-full">
-			<header className="bg-pink-500 text-white flex items-center justify-between px-4 py-3">
+			<header className="bg-black dark:bg-[#262626] text-white flex items-center justify-between px-4 py-3">
 				<div className="flex items-center">
 					<img
 						className="w-10 h-10 object-cover rounded-full mr-4"
@@ -110,17 +110,17 @@ const ChattingPage = () => {
 					}
 				)}
 			</main>
-			<footer className="bg-white px-4 py-3">
+			<footer className="bg-white px-4 py-3 dark:bg-[#262626]">
 				<form onSubmit={handleSubmit} className="flex">
 					<input
 						type="text"
-						className="flex-1 border-gray-300 border-2 rounded-lg py-2 px-3 mr-2 focus:outline-none"
+						className="flex-1 text-black border-gray-500 dark:border-[#fafafa] border-2 rounded-lg py-2 px-3 mr-2 focus:outline-none dark:bg-[#262626] dark:text-[#fff]"
 						placeholder="Type a message..."
 						value={newMessage}
 						onChange={handleChange}
 					/>
 					<button
-						className="bg-blue-500 text-2xl hover:scale-105 cursor-pointer text-white font-bold py-2 px-4 rounded-lg"
+						className="bg-[#000] text-[#fff]  dark:bg-[#fff] dark:text-black text-2xl hover:scale-105 cursor-pointer font-bold py-2 px-4 rounded-lg"
 						type="submit"
 						disabled={!newMessage}
 					>

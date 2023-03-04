@@ -57,7 +57,7 @@ const SideNavbar = () => {
           </nav>
         </div>
         <div className="p-4 w-full md:block hidden">
-          <button className="bg-blue-500 flex justify-center duration-200 items-center text-white py-2 px-4 rounded-lg font-bold w-full dark:bg-[#262626] dark:hover:bg-[#2d3436]">
+          <button className="bg-black flex justify-center duration-200 items-center text-white py-2 px-4 rounded-lg font-bold w-full dark:bg-[#262626] dark:hover:bg-[#2d3436]">
             Logout<FiLogOut className="ml-2" />
           </button>
         </div>
