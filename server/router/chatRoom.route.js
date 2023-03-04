@@ -49,10 +49,10 @@ router.put("/:crId", async (req, res) => {
 	const savedNotification = await newNotification.save();
 
 	// emit new message
-	socket.emit("new-msg");
+	socket.emit("new-msg", { notificationMsg, username });
 
 	// emit notification
-	socket.emit("push-noti");
+	socket.emit("push-noti", { notificationMsg, username });
 
 	return res.json({ success: true, data: updatedChatRoom });
 });

@@ -12,7 +12,7 @@ router.post("/new", async (req, res) => {
 	const newNotification = new NotificationModel({ msg, forUsers });
 	const savedNotification = await newNotification.save();
 	// console.log("Socket-id in /new >> ", socket.id);
-	socket.emit("push-noti", savedNotification);
+	// socket.emit("push-noti", savedNotification);
 	return res.json({ success: true, data: savedNotification });
 });
 
