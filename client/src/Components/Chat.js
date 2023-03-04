@@ -76,7 +76,7 @@ const ChattingPage = () => {
 	};
 
 	return (
-		<div className="flex flex-col h-screen w-full">
+		<div className="flex flex-col md:h-screen h-[92vh] w-full">
 			<header className="bg-pink-500 text-white flex items-center justify-between px-4 py-3">
 				<div className="flex items-center">
 					<img

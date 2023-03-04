@@ -21,7 +21,7 @@ function App() {
               <Route
                 element={
                   <>
-                    <div className="flex">
+                    <div className="flex md:flex-row flex-col">
                       <SideNavbar />
                       <Outlet />
                     </div>
