@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <>
-        <div className="bg-white dark:bg-slate-900">
+        <div className="bg-white dark:bg-[#000000]">
           <Router>
             <Routes>
               <Route
