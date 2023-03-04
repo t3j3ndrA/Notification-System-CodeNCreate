@@ -84,7 +84,7 @@ const Notifications = () => {
 
 	return (
 		<>
-			<div className="p-4 w-full h-screen">
+			<div className="p-4 w-full h-[92vh]">
 				<h1 className="text-2xl font-medium dark:text-white">Notifications</h1>
 				<div className="h-1 mt-2 mb-4 rounded-full bg-black dark:bg-[#262626]"></div>
 				<div className="flex flex-col  overflow-y-auto h-[89vh]" key={key}>
