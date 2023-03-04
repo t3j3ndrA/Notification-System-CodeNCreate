@@ -112,12 +112,16 @@ const ChattingPage = () => {
 						return (
 							<div
 								key={index}
-								className={`text-[#fff] bg-black dark:bg-[#2d3436] dark:text-[#fafafa] ${
-									sender == userId ? "text-right" : "text-left"
+								className={`text-[#fff]   dark:text-[#fafafa] ${
+									sender == userId ? "text-right " : "text-left "
 								} mb-4`}
 							>
 								<p className="font-medium mb-1">{username}</p>
-								<p className="bg-purple-200 rounded-lg py-2 px-3 inline-block">
+								<p
+									className={`${
+										sender == userId ? "bg-[#262626]" : "bg-[#000000]"
+									} border-[1px] border-[#262626] rounded-full py-2 px-3 inline-block`}
+								>
 									{msg}
 								</p>
 								<p className="text-gray-600 text-sm">
@@ -142,7 +146,7 @@ const ChattingPage = () => {
 						type="submit"
 						disabled={!newMessage}
 					>
-                        <FiSend className="" />		
+						<FiSend className="" />
 					</button>
 				</form>
 			</footer>

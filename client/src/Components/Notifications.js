@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -111,7 +111,7 @@ const Notifications = () => {
 						<button
 							type="button"
 							onClick={handleMarkRead}
-							className="rounded-md px-2 py-[1px] text-[#fff] bg-black dark:bg-[#2d3436]"
+							className="rounded-md px-2 py-[1px] text-[#fafafa] bg-black dark:bg-[#2d3436]"
 						>
 							Mark As Read
 						</button>
@@ -119,17 +119,15 @@ const Notifications = () => {
 
 					{notifications?.map(({ msg, forUsers, _id }, idx) => {
 						return (
-							<>
-								<NotificationCard
-									_id={_id}
-									msg={msg}
-									read={forUsers[0].read}
-									createdAt={forUsers[0]?.createdAt}
-									selectedNotifications={selectedNotifications}
-									setSelectedNotifications={setSelectedNotifications}
-									setKey={setKey}
-								/>
-							</>
+							<NotificationCard
+								_id={_id}
+								msg={msg}
+								read={forUsers[0].read}
+								createdAt={forUsers[0]?.createdAt}
+								selectedNotifications={selectedNotifications}
+								setSelectedNotifications={setSelectedNotifications}
+								setKey={setKey}
+							/>
 						);
 					})}
 				</div>
@@ -151,16 +149,20 @@ const NotificationCard = ({
 	const dt = new Date(createdAt);
 
 	return (
-		<>
+		<Link to={"/messages"}>
 			<div
-				className={`border-b  flex space-x-4  p-2 ${
-					read ? "" : "bg-slate-200"
+				className={`border-b  flex space-x-4  p-2  ${
+					read ? "hover:bg-[#121212]" : "bg-[#aa9797] font-bold shadow-2xl"
 				}`}
 			>
 				<input
 					type={"checkbox"}
 					checked={selectedNotifications.has(_id)}
-					onClick={() => {
+					disabled={read}
+					onClick={(e) => {
+						if (!e) var e = window.event;
+						e.cancelBubble = true;
+						if (e.stopPropagation) e.stopPropagation();
 						let s = selectedNotifications;
 						if (s.has(_id)) {
 							s.delete(_id);
@@ -175,13 +177,13 @@ const NotificationCard = ({
 				<img src="../images/avatar.jpg" className="w-12 h-12 rounded-full " />
 				<div>
 					{/* <h4 className="font-medium">{read ? "read" : "unread"}</h4> */}
-					<p className="text-gray-600 text-sm">
+					<p className="text-[#fafafa] text-sm">
 						{dt ? `${dt.getHours()}:${dt.getMinutes()}` : ""}
 					</p>
-					<h4>{msg}</h4>
+					<h4 className="text-[#fafafa] text-sm">{msg}</h4>
 				</div>
 			</div>
-		</>
+		</Link>
 	);
 };
 

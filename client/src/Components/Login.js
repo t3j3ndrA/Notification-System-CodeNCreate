@@ -8,10 +8,10 @@ import { IoLogoGooglePlaystore } from "react-icons/io5";
 import { ThemeContext } from "../ThemeContext";
 
 const Login = () => {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [email, setEmail] = useState("t3j");
+	const [password, setPassword] = useState("12345");
 	const navigate = useNavigate();
-
+	const [error, setError] = useState("");
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		// Logic for handling login form submission
@@ -25,14 +25,16 @@ const Login = () => {
 			localStorage.setItem("username", data.data.username);
 			localStorage.setItem("_id", data.data._id);
 
-			navigate("/chat");
+			navigate("/messages");
+		} else {
+			setError("Wrong credentials");
 		}
 	};
 	const { theme, setTheme } = React.useContext(ThemeContext);
 
 	return (
 		<>
-			<div className="flex h-screen w-3/5 mx-auto sm:py-12 justify-center mb-4">
+			<div className="flex  w-3/5 mx-auto sm:py-12 justify-center mb-4">
 				<div
 					className="w-1/2 lg:flex items-center justify-center relative hidden"
 					style={{ backgroundSize: "cover", backgroundPosition: "center" }}
@@ -43,11 +45,19 @@ const Login = () => {
 				<div className="flex flex-col space-y-4">
 					<div className="sm:border flex flex-col items-center border-gray-300 shadow-sm shadow-gray-300">
 						{/* <img src="../images/insta.png" className="w-64 my-8" /> */}
-						{theme === 'light' ? <img src="../images/insta.png" className="w-64 my-8" /> :
-							<img src="../images/insta-dark.png" className="w-56 my-8" />}
+						{theme === "light" ? (
+							<img src="../images/insta.png" className="w-64 my-8" />
+						) : (
+							<img src="../images/insta-dark.png" className="w-56 my-8" />
+						)}
 						<div className="sm:w-[90%] p-6 rounded-lg">
 							<form onSubmit={handleSubmit}>
 								<div className="mb-2">
+									<div className="flex flex-col justify-center text-white text-xl -mt-10 mb-2">
+										<p>For testing Please use </p>
+										<p>Username : t3j </p>
+										<p>Password : 12345 </p>
+									</div>
 									<input
 										type=""
 										id="email"
@@ -73,6 +83,9 @@ const Login = () => {
 								>
 									Log In
 								</button>
+								<p className="text-red-800 text-center mt-2 font-semibold">
+									{error}
+								</p>
 							</form>
 							<div className="my-6 relative">
 								<h6 className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 text-gray-500 text-sm font-medium bg-white z-50 w-12 text-center dark:bg-black dark:text-white">
@@ -87,14 +100,15 @@ const Login = () => {
 									<AiFillFacebook className="mr-2 text-3xl" />
 									<span className="ml-2">Login with Facebook</span>
 								</button>
-
 							</div>
-							<h6 className="text-center text-xs my-4 text-indigo-700 cursor-pointer">Forgot password?</h6>
+							<h6 className="text-center text-xs my-4 text-indigo-700 cursor-pointer">
+								Forgot password?
+							</h6>
 						</div>
 					</div>
 					<div className="sm:border sm:p-6 p-5 border-gray-300">
 						<h1 className="text-center">
-							<span className="dark:text-white">Don't have an account?{" "}</span>
+							<span className="dark:text-white">Don't have an account? </span>
 							<span className="text-indigo-700 cursor-pointer">Sign up</span>
 						</h1>
 					</div>
@@ -124,11 +138,10 @@ const Login = () => {
 	);
 };
 
-
 const Footer = () => {
 	return (
 		<>
-			<div className="text-gray-500 text-xs flex space-x-4 sm:w-3/5 justify-center mx-auto flex-wrap mt-10">
+			<div className="text-gray-500 text-xs flex space-x-4 sm:w-3/5 justify-center mx-auto flex-wrap mt-12">
 				<h1>Meta</h1>
 				<h1>About</h1>
 				<h1>Blog</h1>
@@ -150,6 +163,6 @@ const Footer = () => {
 				</div>
 			</div>
 		</>
-	)
-}
+	);
+};
 export default Login;
