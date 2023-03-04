@@ -94,7 +94,7 @@ const ChattingPage = () => {
 						return (
 							<div
 								key={index}
-								className={`${
+								className={`text-[#fff] bg-black dark:bg-[#2d3436] dark:text-[#fafafa] ${
 									sender == userId ? "text-right" : "text-left"
 								} mb-4`}
 							>
