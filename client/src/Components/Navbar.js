@@ -13,7 +13,7 @@ const SideNavbar = () => {
   const loc = useLocation();
 
   return (
-    <div className="flex order-last md:order-first  md:static">
+    <div className="flex order-last md:order-first md:static">
       <div
         className={`md:w-64 md:h-screen md:border-r border-t bg-white text-black flex flex-row md:flex-col items-center justify-between transition-transform duration-300 ease-in-out`}
       >
@@ -21,7 +21,7 @@ const SideNavbar = () => {
           <img src="../images/insta.png" className="md:w-full hidden md:block"/>
           <nav className="md:mt-6">
             <ul className="flex flex-row md:flex-col md:w-full w-screen pr-0 sm:px-6 md:pr-0 justify-between">
-              <Link to={"/"} className={`flex space-x-2 items-center md:mb-4 rounded-lg py-2 px-2 sm:px-4 cursor-pointer hover:bg-gray-200 ${loc.pathname === "/" ? "bg-gray-200 font-medium" : ""}`}>
+              <Link to={"/home"} className={`flex space-x-2 items-center md:mb-4 rounded-lg py-2 px-2 sm:px-4 cursor-pointer hover:bg-gray-200 ${loc.pathname === "/home" ? "bg-gray-200 font-medium" : ""}`}>
                 <FiHome className="text-base sm:text-2xl md:text-base"/>
                 <h6 className="hidden md:block">Home</h6>
               </Link>
