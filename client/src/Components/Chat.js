@@ -1,6 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FiSend } from "react-icons/fi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 import { io } from "socket.io-client";
 const socket = io("http://localhost:5000");
@@ -12,6 +15,8 @@ const ChattingPage = () => {
 	const [chatRoom, setChatRoom] = useState({});
 	const [isConnected, setIsConnected] = useState(socket.connected);
 	const [key, setKey] = useState(Math.random());
+	const navigate = useNavigate();
+	const chatRef = useRef(null);
 
 	const fetchChatRoom = async () => {
 		axios
@@ -52,9 +57,14 @@ const ChattingPage = () => {
 
 		socket.on("new-msg", () => {
 			fetchChatRoom();
+			chatRef.current.scrollIntoView({ behavior: "smooth" });
 		});
 
-		socket.on("new-noti", (notification) => {});
+		socket.on("new-noti", ({ notificationMsg, username: u }) => {
+			console.log(notificationMsg);
+			console.log(u);
+			if (username != u) showToastMessage(notificationMsg);
+		});
 
 		return () => {
 			socket.off("connect");
@@ -75,6 +85,14 @@ const ChattingPage = () => {
 		sendMessage();
 	};
 
+	const showToastMessage = (msg) => {
+		toast.success(msg, {
+			position: toast.POSITION.BOTTOM_RIGHT,
+			onClick: () => {
+				navigate("/notifications");
+			},
+		});
+	};
 	return (
 		<div className="flex flex-col md:h-screen h-[92vh] w-full">
 			<header className="bg-black dark:bg-[#262626] text-white flex items-center justify-between px-4 py-3">

@@ -54,9 +54,9 @@ io.on("connection", (socket) => {
 		socket.to("my-room").emit("new-noti", notification);
 	});
 
-	socket.on("new-msg", () => {
+	socket.on("new-msg", (msg) => {
 		console.log("socke.on(new-msg)");
-		socket.to("my-room").emit("new-msg", "Fetch messages");
+		socket.to("my-room").emit("new-msg", msg);
 	});
 
 	socket.on("disconnect", () => {

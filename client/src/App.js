@@ -28,11 +28,11 @@ function App() {
                   </>
                 }
               >
-                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/messages" element={<ChattingPage />} />
                 <Route path="/notifications" element={<Notifications />} />
               </Route>
-              <Route path="/login" element={<Login />} />
+              <Route path="/" element={<Login />} />
             </Routes>
           </Router>
         </div>

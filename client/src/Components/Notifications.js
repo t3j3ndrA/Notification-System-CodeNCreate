@@ -1,5 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { io } from "socket.io-client";
 const socket = io("http://localhost:5000");
@@ -11,6 +14,7 @@ const Notifications = () => {
 	const [key, setKey] = useState(Math.random());
 	const [isConnected, setIsConnected] = useState(socket.connected);
 	const [selectedNotifications, setSelectedNotifications] = useState(new Set());
+	const navigate = useNavigate();
 
 	console.log(selectedNotifications);
 
@@ -51,7 +55,11 @@ const Notifications = () => {
 			setIsConnected(false);
 		});
 
-		socket.on("new-msg", () => {});
+		socket.on("new-msg", ({ notificationMsg, username: u }) => {
+			console.log(notificationMsg);
+			console.log(u);
+			if (username != u) showToastMessage(notificationMsg);
+		});
 
 		socket.on("new-noti", (notification) => {
 			fetchUsersNotifications();
@@ -64,6 +72,15 @@ const Notifications = () => {
 			socket.off("new-msg");
 		};
 	}, []);
+
+	const showToastMessage = (msg) => {
+		toast.success(msg, {
+			position: toast.POSITION.BOTTOM_RIGHT,
+			onClick: () => {
+				navigate("/messages");
+			},
+		});
+	};
 
 	return (
 		<>
@@ -117,6 +134,7 @@ const Notifications = () => {
 					})}
 				</div>
 			</div>
+			<ToastContainer onClick={() => {}} />
 		</>
 	);
 };
