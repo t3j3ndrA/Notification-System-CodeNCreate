@@ -4,8 +4,11 @@ import { FiSend } from "react-icons/fi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import image1 from "../images/dark-bg.jpg";
+import image2 from "../images/light-bg.jpg";
 
 import { io } from "socket.io-client";
+import { ThemeContext } from "../ThemeContext";
 const socket = io("http://localhost:5000");
 
 const ChattingPage = () => {
