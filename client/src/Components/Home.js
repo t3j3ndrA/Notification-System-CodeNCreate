@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-const socket = io();
+const socket = io("https://noti-sys-cnc.onrender.com");
 
 const Home = () => {
 	const [isConnected, setIsConnected] = useState(socket.connected);

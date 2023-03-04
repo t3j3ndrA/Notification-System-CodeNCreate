@@ -1,7 +1,7 @@
 const NotificationModel = require("../models/Notification.model");
 // const { io } = require("socket.io-client");
 
-// const socket = io();
+// const socket = io("https://noti-sys-cnc.onrender.com");
 
 const socket = require("../utils/serverSocket");
 

@@ -9,7 +9,7 @@ import image2 from "../images/light-bg.jpg";
 
 import { io } from "socket.io-client";
 import { ThemeContext } from "../ThemeContext";
-const socket = io();
+const socket = io("https://noti-sys-cnc.onrender.com");
 
 const ChattingPage = () => {
 	const userId = localStorage.getItem("_id");
@@ -20,7 +20,6 @@ const ChattingPage = () => {
 	const [key, setKey] = useState(Math.random());
 	const navigate = useNavigate();
 	const chatRef = useRef(null);
-
 	const fetchChatRoom = async () => {
 		axios
 			.get(`/api/room/6401fb9bfc859f42a023419c`)

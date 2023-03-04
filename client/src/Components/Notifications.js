@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { io } from "socket.io-client";
-const socket = io();
+const socket = io("https://noti-sys-cnc.onrender.com");
 
 const Notifications = () => {
 	const userId = localStorage.getItem("_id");
